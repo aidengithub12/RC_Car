@@ -71,7 +71,7 @@ void setup(){
 }
  
 void loop(){
-  
+
   //remote control logic
   if (digitalRead(fw) == HIGH) {
     move = 'f';
@@ -89,6 +89,6 @@ void loop(){
     move = 's';
   }
 
-
+  delayMicroseconds(1000000);
   Serial.println("g");
 }
