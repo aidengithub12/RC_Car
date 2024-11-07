@@ -20,11 +20,12 @@ const char* serverName = "http://192.168.4.1/move";
 
 
 //pins
-int stopPin = 13;
-int left1 = 27;
-int left2 = 32;
-int right1 = 33;
-int right2 = 25;
+int stopPin1 = 13; //right
+int stopPin2 = 14; //left
+// int left1 = 27;
+// int left2 = 32;
+// int right1 = 33;
+// int right2 = 25;
 
 
 String move;
@@ -34,7 +35,7 @@ const long interval = 1000;
 
 void setup() {
   Serial.begin(9600);
-  
+  Serial.println("NEW CODE SETUP V2 STARTED!");
   WiFi.begin(ssid, password);
   Serial.println("Connecting");
   while(WiFi.status() != WL_CONNECTED) { 
@@ -46,11 +47,12 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   //set up pins
-  pinMode(stopPin, OUTPUT);
-  pinMode(left1, OUTPUT);
-  pinMode(left2, OUTPUT);
-  pinMode(right1, OUTPUT);
-  pinMode(right2, OUTPUT);
+  pinMode(stopPin1, OUTPUT);
+  pinMode(stopPin2, OUTPUT);
+  // pinMode(left1, OUTPUT);
+  // pinMode(left2, OUTPUT);
+  // pinMode(right1, OUTPUT);
+  // pinMode(right2, OUTPUT);
   pinMode(2, OUTPUT);
 }
 
@@ -64,29 +66,29 @@ void loop() {
       Serial.println(move);
       
       if (move.equalsIgnoreCase("s")) {
-        digitalWrite(stopPin, LOW);
+        digitalWrite(stopPin1, LOW);
+        digitalWrite(stopPin2, LOW);
         Serial.println("Stopped");
         digitalWrite(2, LOW);
       }
       else if (move.equalsIgnoreCase("f")) {
-        digitalWrite(stopPin, HIGH);
+        digitalWrite(stopPin1, HIGH);
+        digitalWrite(stopPin2, HIGH);
         Serial.println("Forward");
         digitalWrite(2, HIGH);
       }
       else if (move.equalsIgnoreCase("l")){
-        digitalWrite(stopPin, HIGH);
-        digitalWrite(right1, LOW);
-        digitalWrite(right2, LOW);
-        digitalWrite(left1, HIGH);
-        digitalWrite(left2, HIGH);
+        digitalWrite(stopPin2, HIGH);
+        
+        
         Serial.println("Left");
       }
       else if (move.equalsIgnoreCase("r")) {
-        digitalWrite(stopPin, HIGH);
-        digitalWrite(right1, HIGH);
-        digitalWrite(right2, HIGH);
-        digitalWrite(left1, LOW);
-        digitalWrite(left2, LOW);
+        digitalWrite(stopPin1, HIGH);
+        // digitalWrite(right1, HIGH);
+        // digitalWrite(right2, HIGH);
+        // digitalWrite(left1, LOW);
+        // digitalWrite(left2, LOW);
         Serial.println("Right");
       }
       else if (move.equalsIgnoreCase("b")) {
